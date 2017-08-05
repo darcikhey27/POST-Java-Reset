@@ -9,7 +9,7 @@ AnchorPane {
 TextField {
 	-fx-background-color: #a9a9a9 , white , white;
 }
-.labels {
+Label {
 	-fx-font-size: 12px;
     -fx-fill: white;
     -fx-font-family: Consolas;

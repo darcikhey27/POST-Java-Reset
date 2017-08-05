@@ -24,7 +24,7 @@ public class Controller implements Initializable  {
 		System.out.println("Button was clicked");
 		Model modelTest = new Model();
 		try {
-			modelTest.executePost4();
+			modelTest.executePost3();
 			
 			
 		} 

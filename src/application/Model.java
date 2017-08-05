@@ -25,13 +25,13 @@ public class Model {
 	// ip address
 
 	public void executePost(String ipAddress) throws Exception {
-		URL url = new URL("http://localhost:4567/number");
+		URL url = new URL("http://httpbin.org/ip");
 		URLConnection conn = url.openConnection();
 		conn.setDoOutput(true);
 		OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
 
-		writer.write("name=darci&password=pass");
-		writer.flush();
+		//writer.write("name=darci&password=pass");
+		//writer.flush();
 		String line;
 		BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		while ((line = reader.readLine()) != null) {
@@ -53,8 +53,10 @@ public class Model {
 		arguments.put("username", "darci");
 		arguments.put("password", "pass"); // This is a fake password obviously
 		StringJoiner sj = new StringJoiner("&");
+		
 		for (Map.Entry<String, String> entry : arguments.entrySet())
 			sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "=" + URLEncoder.encode(entry.getValue(), "UTF-8"));
+		
 		byte[] out = sj.toString().getBytes(StandardCharsets.UTF_8);
 		int length = out.length;
 
@@ -69,14 +71,31 @@ public class Model {
 
 	public void executePost3() {
 		try {
-			URL u = new URL("http://localhost:4567/form");
+			URL u = new URL("http://httpbin.org/ip");
 			
 			URLConnection uc = u.openConnection();
 			uc.setAllowUserInteraction(true);
 			uc.connect();
 			InputStream in = uc.getInputStream();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 			System.out.println(uc.getContentType());
 			
+			String line = "";
+			while( (line = reader.readLine()) != null) {
+				System.out.println(line);
+			}
+			
+			/*
+			 InputStream in = new FileInputStream(new File("C:/temp/test.txt"));
+		        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+		        StringBuilder out = new StringBuilder();
+		        String line;
+		        while ((line = reader.readLine()) != null) {
+		            out.append(line);
+		        }
+		        System.out.println(out.toString());   //Prints the string content read from input stream
+		        reader.close();
+			*/
 		} 
 		catch (IOException ex) {
 			System.err.println(ex);
@@ -84,7 +103,7 @@ public class Model {
 	}
 	public void executePost4() {
 		try {
-			URL u = new URL("http://127.0.0.1:4567/form");
+			URL u = new URL("http://httpbin.org/ip");
 			URLConnection uc = u.openConnection();
 			uc.setDoOutput(true);
 			
