@@ -3,30 +3,30 @@
 
 /* style for the whole window */
 AnchorPane {
-	-fx-background-color: rgb(101, 101, 101);
+	-fx-background-color: rgb(101.0, 101.0, 101.0);
 }
 
 TextField {
 	-fx-background-color: #a9a9a9 , white , white;
 }
 Label {
-	-fx-font-size: 12px;
+	-fx-font-size: 12.0px;
     -fx-fill: white;
     -fx-font-family: Consolas;
 }
 
 VBox{
 	  
-	-fx-background-color: rgb(101, 101, 101);
+	-fx-background-color: rgb(101.0, 101.0, 101.0);
 }
 
 #buttonEnter {
 	
-	-fx-background-color: rgb(124,187,0)
+	-fx-background-color: rgb(124.0,187.0,0.0)
 	
 }
 
 #buttonExit{
-	-fx-background-color: rgb(219, 68, 55);
+	-fx-background-color: rgb(219.0, 68.0, 55.0);
 	
 }
