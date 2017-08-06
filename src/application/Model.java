@@ -17,6 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
+import java.util.Base64;
 
 public class Model {
 
@@ -30,8 +31,8 @@ public class Model {
 		conn.setDoOutput(true);
 		OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
 
-		//writer.write("name=darci&password=pass");
-		//writer.flush();
+		// writer.write("name=darci&password=pass");
+		// writer.flush();
 		String line;
 		BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		while ((line = reader.readLine()) != null) {
@@ -53,10 +54,10 @@ public class Model {
 		arguments.put("username", "darci");
 		arguments.put("password", "pass"); // This is a fake password obviously
 		StringJoiner sj = new StringJoiner("&");
-		
+
 		for (Map.Entry<String, String> entry : arguments.entrySet())
 			sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "=" + URLEncoder.encode(entry.getValue(), "UTF-8"));
-		
+
 		byte[] out = sj.toString().getBytes(StandardCharsets.UTF_8);
 		int length = out.length;
 
@@ -71,56 +72,79 @@ public class Model {
 
 	public void executePost3() {
 		try {
-			URL u = new URL("http://httpbin.org/ip");
-			
+			// URL u = new URL("http://httpbin.org/ip");
+
+			URL u = new URL("https://requestb.in/1i3ztug1");
 			URLConnection uc = u.openConnection();
+
 			uc.setAllowUserInteraction(true);
 			uc.connect();
 			InputStream in = uc.getInputStream();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 			System.out.println(uc.getContentType());
-			
+
 			String line = "";
-			while( (line = reader.readLine()) != null) {
+			while ((line = reader.readLine()) != null) {
 				System.out.println(line);
 			}
-			
+
 			/*
-			 InputStream in = new FileInputStream(new File("C:/temp/test.txt"));
-		        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-		        StringBuilder out = new StringBuilder();
-		        String line;
-		        while ((line = reader.readLine()) != null) {
-		            out.append(line);
-		        }
-		        System.out.println(out.toString());   //Prints the string content read from input stream
-		        reader.close();
-			*/
-		} 
-		catch (IOException ex) {
+			 * InputStream in = new FileInputStream(new
+			 * File("C:/temp/test.txt")); BufferedReader reader = new
+			 * BufferedReader(new InputStreamReader(in)); StringBuilder out =
+			 * new StringBuilder(); String line; while ((line =
+			 * reader.readLine()) != null) { out.append(line); }
+			 * System.out.println(out.toString()); //Prints the string content
+			 * read from input stream reader.close();
+			 */
+		} catch (IOException ex) {
 			System.err.println(ex);
 		}
 	}
+
 	public void executePost4() {
 		try {
 			URL u = new URL("http://httpbin.org/ip");
 			URLConnection uc = u.openConnection();
 			uc.setDoOutput(true);
-			
+
 			OutputStream raw = uc.getOutputStream();
-			
+
 			OutputStream buffered = new BufferedOutputStream(raw);
 			OutputStreamWriter out = new OutputStreamWriter(buffered, "8859_1");
 			out.write("name=darci&password=pass");
 			out.write("\r\n");
 			out.flush();
 			out.close();
-			
-		}
-		catch(Exception e) {
+
+		} catch (Exception e) {
 			System.err.println(e);
 		}
-		
+
+	}
+
+	public void executePost5() {
+		try {
+            URL url = new URL ("http://localhost:4567/form");
+            
+            
+            String encoding = Base64.getEncoder().encodeToString(new String("darci:password").getBytes());
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            connection.setRequestProperty  ("Authorization", "Basic " + encoding);
+            InputStream content = (InputStream)connection.getInputStream();
+            BufferedReader in   = 
+                new BufferedReader (new InputStreamReader (content));
+            String line;
+            while ((line = in.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
 	}
 
 }
