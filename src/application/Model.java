@@ -2,6 +2,7 @@ package application;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,6 +18,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
+
+import javax.net.ssl.HttpsURLConnection;
+
 import java.util.Base64;
 
 public class Model {
@@ -77,7 +81,7 @@ public class Model {
 			URL u = new URL("http://192.168.1.10/command.htm?key=VOLUME_DOWN ");
 			URLConnection uc = u.openConnection();
 
-			uc.setAllowUserInteraction(true);	
+			uc.setAllowUserInteraction(true);
 			uc.connect();
 			InputStream in = uc.getInputStream();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
@@ -109,7 +113,6 @@ public class Model {
 			uc.setDoOutput(true);
 
 			OutputStream raw = uc.getOutputStream();
-			
 
 			OutputStream buffered = new BufferedOutputStream(raw);
 			OutputStreamWriter out = new OutputStreamWriter(buffered, "8859_1");
@@ -127,26 +130,65 @@ public class Model {
 
 	public void executePost5() {
 		try {
-            URL url = new URL ("http://192.168.1.10.command.htm?key=OFFHOOK");
-            
-            
-            String encoding = Base64.getEncoder().encodeToString(new String("admin:mKHyJQkDWu2hQ9Ng").getBytes());
+			URL url = new URL("http://192.168.1.10.command.htm?key=OFFHOOK");
 
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setDoOutput(true);
-            connection.setRequestProperty  ("Authorization", "Basic " + encoding);
-            InputStream content = (InputStream)connection.getInputStream();
-            BufferedReader in   = 
-                new BufferedReader (new InputStreamReader (content));
-            String line;
-            while ((line = in.readLine()) != null) {
-                System.out.println(line);
-            }
-        } catch(Exception e) {
-        	System.out.println("Error occured on executePost5()");
-            e.printStackTrace();
-        }
+			String encoding = Base64.getEncoder().encodeToString(new String("admin:mKHyJQkDWu2hQ9Ng").getBytes());
+
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("POST");
+			connection.setDoOutput(true);
+			connection.setRequestProperty("Authorization", "Basic " + encoding);
+			InputStream content = (InputStream) connection.getInputStream();
+			BufferedReader in = new BufferedReader(new InputStreamReader(content));
+			String line;
+			while ((line = in.readLine()) != null) {
+				System.out.println(line);
+			}
+		} catch (Exception e) {
+			System.out.println("Error occured on executePost5()");
+			e.printStackTrace();
+		}
+
+	}
+
+	// HTTP POST request
+	private void sendPost() throws Exception {
+		final String USER_AGENT = "Mozilla/5.0";
+
+		String url = "https://selfsolve.apple.com/wcResults.do";
+		URL obj = new URL(url);
+		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+
+		// add reuqest header
+		con.setRequestMethod("POST");
+		con.setRequestProperty("User-Agent", USER_AGENT);
+		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+
+		String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
+
+		// Send post request
+		con.setDoOutput(true);
+		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+		wr.writeBytes(urlParameters);
+		wr.flush();
+		wr.close();
+
+		int responseCode = con.getResponseCode();
+		System.out.println("\nSending 'POST' request to URL : " + url);
+		System.out.println("Post parameters : " + urlParameters);
+		System.out.println("Response Code : " + responseCode);
+
+		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+
+		// print result
+		System.out.println(response.toString());
 
 	}
 
