@@ -74,10 +74,10 @@ public class Model {
 		try {
 			// URL u = new URL("http://httpbin.org/ip");
 
-			URL u = new URL("https://requestb.in/1i3ztug1");
+			URL u = new URL("http://192.168.1.10/command.htm?key=VOLUME_DOWN ");
 			URLConnection uc = u.openConnection();
 
-			uc.setAllowUserInteraction(true);
+			uc.setAllowUserInteraction(true);	
 			uc.connect();
 			InputStream in = uc.getInputStream();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
@@ -104,18 +104,20 @@ public class Model {
 
 	public void executePost4() {
 		try {
-			URL u = new URL("http://httpbin.org/ip");
+			URL u = new URL("http://10.90.1.100/");
 			URLConnection uc = u.openConnection();
 			uc.setDoOutput(true);
 
 			OutputStream raw = uc.getOutputStream();
+			
 
 			OutputStream buffered = new BufferedOutputStream(raw);
 			OutputStreamWriter out = new OutputStreamWriter(buffered, "8859_1");
-			out.write("name=darci&password=pass");
+			out.write("http_user=admin&http_pass=mKHyJQkDWu2hQ9Ng");
 			out.write("\r\n");
 			out.flush();
 			out.close();
+			System.out.println("-------------- executePost4() completed");
 
 		} catch (Exception e) {
 			System.err.println(e);
@@ -125,10 +127,10 @@ public class Model {
 
 	public void executePost5() {
 		try {
-            URL url = new URL ("http://localhost:4567/form");
+            URL url = new URL ("http://192.168.1.10.command.htm?key=OFFHOOK");
             
             
-            String encoding = Base64.getEncoder().encodeToString(new String("darci:password").getBytes());
+            String encoding = Base64.getEncoder().encodeToString(new String("admin:mKHyJQkDWu2hQ9Ng").getBytes());
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
@@ -142,6 +144,7 @@ public class Model {
                 System.out.println(line);
             }
         } catch(Exception e) {
+        	System.out.println("Error occured on executePost5()");
             e.printStackTrace();
         }
 
