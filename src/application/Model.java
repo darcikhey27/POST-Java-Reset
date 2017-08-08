@@ -25,112 +25,11 @@ import java.util.Base64;
 
 public class Model {
 
-	// do all the processing here
-	// create a hash table that will conenct my button.number to
-	// ip address
 
-	public void executePost(String ipAddress) throws Exception {
-		URL url = new URL("http://httpbin.org/ip");
-		URLConnection conn = url.openConnection();
-		conn.setDoOutput(true);
-		OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
 
-		// writer.write("name=darci&password=pass");
-		// writer.flush();
-		String line;
-		BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-		while ((line = reader.readLine()) != null) {
-			System.out.println(line);
-		}
-		writer.close();
-		reader.close();
-
-	}
-
-	public void excutePost2() throws Exception {
-		URL url = new URL("http://localhost:4567/form");
-		URLConnection con = url.openConnection();
-		HttpURLConnection http = (HttpURLConnection) con;
-		http.setRequestMethod("POST"); // PUT is another valid option
-		http.setDoOutput(true);
-
-		Map<String, String> arguments = new HashMap<>();
-		arguments.put("username", "darci");
-		arguments.put("password", "pass"); // This is a fake password obviously
-		StringJoiner sj = new StringJoiner("&");
-
-		for (Map.Entry<String, String> entry : arguments.entrySet())
-			sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "=" + URLEncoder.encode(entry.getValue(), "UTF-8"));
-
-		byte[] out = sj.toString().getBytes(StandardCharsets.UTF_8);
-		int length = out.length;
-
-		http.setFixedLengthStreamingMode(length);
-		http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-		http.connect();
-		try (OutputStream os = http.getOutputStream()) {
-			os.write(out);
-		}
-
-	}
-
-	public void executePost3() {
+	public void executePost() {
 		try {
-			// URL u = new URL("http://httpbin.org/ip");
-
-			URL u = new URL("http://192.168.1.10/command.htm?key=VOLUME_DOWN ");
-			URLConnection uc = u.openConnection();
-
-			uc.setAllowUserInteraction(true);
-			uc.connect();
-			InputStream in = uc.getInputStream();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-			System.out.println(uc.getContentType());
-
-			String line = "";
-			while ((line = reader.readLine()) != null) {
-				System.out.println(line);
-			}
-
-			/*
-			 * InputStream in = new FileInputStream(new
-			 * File("C:/temp/test.txt")); BufferedReader reader = new
-			 * BufferedReader(new InputStreamReader(in)); StringBuilder out =
-			 * new StringBuilder(); String line; while ((line =
-			 * reader.readLine()) != null) { out.append(line); }
-			 * System.out.println(out.toString()); //Prints the string content
-			 * read from input stream reader.close();
-			 */
-		} catch (IOException ex) {
-			System.err.println(ex);
-		}
-	}
-
-	public void executePost4() {
-		try {
-			URL u = new URL("http://10.90.1.100/");
-			URLConnection uc = u.openConnection();
-			uc.setDoOutput(true);
-
-			OutputStream raw = uc.getOutputStream();
-
-			OutputStream buffered = new BufferedOutputStream(raw);
-			OutputStreamWriter out = new OutputStreamWriter(buffered, "8859_1");
-			out.write("http_user=admin&http_pass=mKHyJQkDWu2hQ9Ng");
-			out.write("\r\n");
-			out.flush();
-			out.close();
-			System.out.println("-------------- executePost4() completed");
-
-		} catch (Exception e) {
-			System.err.println(e);
-		}
-
-	}
-
-	public void executePost5() {
-		try {
-			URL url = new URL("http://192.168.1.10.command.htm?key=OFFHOOK");
+			URL url = new URL("http://10.90.1.134/command.htm?key=VOLUME_DOWN");
 
 			String encoding = Base64.getEncoder().encodeToString(new String("admin:mKHyJQkDWu2hQ9Ng").getBytes());
 
@@ -138,6 +37,7 @@ public class Model {
 			connection.setRequestMethod("POST");
 			connection.setDoOutput(true);
 			connection.setRequestProperty("Authorization", "Basic " + encoding);
+			connection.connect();
 			InputStream content = (InputStream) connection.getInputStream();
 			BufferedReader in = new BufferedReader(new InputStreamReader(content));
 			String line;
@@ -152,19 +52,19 @@ public class Model {
 	}
 
 	// HTTP POST request
-	private void sendPost() throws Exception {
+	public void sendPost() throws Exception {
 		final String USER_AGENT = "Mozilla/5.0";
 
-		String url = "https://selfsolve.apple.com/wcResults.do";
+		String url = "http://10.90.1.134/command.htm?key=VOLUME_UP";
 		URL obj = new URL(url);
-		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 		// add reuqest header
 		con.setRequestMethod("POST");
 		con.setRequestProperty("User-Agent", USER_AGENT);
 		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 
-		String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
+		String urlParameters = "admin=admin&pass=mKHyJQkDWu2hQ9Ng";
 
 		// Send post request
 		con.setDoOutput(true);
@@ -182,14 +82,12 @@ public class Model {
 		String inputLine;
 		StringBuffer response = new StringBuffer();
 
-		while ((inputLine = in.readLine()) != null) {
+		while( (inputLine = in.readLine()) != null) {
 			response.append(inputLine);
 		}
 		in.close();
-
 		// print result
 		System.out.println(response.toString());
-
 	}
 
 }
