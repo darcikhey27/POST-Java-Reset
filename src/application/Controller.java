@@ -32,9 +32,10 @@ public class Controller implements Initializable  {
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
+			System.out.println("--- Error executing POST message ---");
 			e.printStackTrace();
 		}
-		System.out.println("POST request was executed on localhost");
+		System.out.println("POST request was executed on ip address");
 		statusLabel.setText("POST request was sent");
 		
 	}
