@@ -34,13 +34,16 @@ public class Model {
 	private final String REST_RECIEVED = "/index.htm?receiveddel=0";
 	private final String REBOOT = "/advanced_update.htm?reboot=Reboot";
 	private final String PROTOCOL = "http://";
+	private final String CREDENTIALS = "admin:mKHyJQkDWu2hQ9Ng";
+	private final String VOLUME_UP = "/command.htm?key=VOLUME_UP";
+	private final String VOLUME_DOWN = "/command.htm?key=VOLUME_DOWN";
+	
 	private HashMap<Integer, InetAddress> rooms;
 	private List<InetAddress> suitesList100;
 	private List<InetAddress> suitesList200;
 	private List<InetAddress> suitesList300;
-	
+
 	private URL url = null;
-	private String IPaddress;
 
 	public Model() {
 		// initialize data structure here
@@ -84,8 +87,44 @@ public class Model {
 
 	public void resetMissedCalls(int roomExtension) {
 		// execute post to rest the missed calls
-		//Integer roomNumber = rooms.get(key)
-		this.IPaddress = rooms.get(key)
+		// Integer roomNumber = rooms.get(key)
+		String IPaddress = "";
+		IPaddress = rooms.get(roomExtension).getHostAddress();
+		System.out.println(IPaddress);
+
+		try {
+			
+			// DEBUG MODE
+			URL urlTest = new URL(PROTOCOL+"10.90.1.134"+VOLUME_DOWN);
+			
+			//this.url = new URL(PROTOCOL + IPaddress + RESET_MISSED);
+			String encoding = Base64.getEncoder().encodeToString(new String(CREDENTIALS).getBytes());
+			HttpURLConnection connection = (HttpURLConnection) urlTest.openConnection();
+			connection.setRequestMethod("POST");
+			connection.setDoOutput(true);
+			connection.setRequestProperty("Authorization", "Basic " + encoding);
+			connection.connect();
+			
+			InputStream content = (InputStream) connection.getInputStream();
+			BufferedReader in = new BufferedReader(new InputStreamReader(content));
+			String line;
+			while ((line = in.readLine()) != null) {
+				System.out.println(line);
+			}
+
+		} 
+		catch (MalformedURLException e) {
+			System.out.println("MalformedURLException--");
+			System.out.println(e.getMessage());
+		} 
+		catch (ProtocolException e) {
+			System.out.println("ProtocolException--");
+			System.out.println(e.getMessage());
+		} 
+		catch (IOException e) {
+			System.out.println("IOException--");
+			System.out.println(e.getMessage());
+		}
 
 	}
 
@@ -104,20 +143,20 @@ public class Model {
 
 	}
 
-	private void setIPAddress() {
-		InetAddress ip = null;
-		try {
-			// read the ip addresses from a file maybe??
-			ip = InetAddress.getByName("192.168.2.1");
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		byte[] bytes = ip.getAddress();
-		for (byte b : bytes) {
-			System.out.println(b & 0xFF);
-		}
-	}
+	// private void setIPAddress() {
+	// InetAddress ip = null;
+	// try {
+	// // read the ip addresses from a file maybe??
+	// ip = InetAddress.getByName("192.168.2.1");
+	// } catch (UnknownHostException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	// byte[] bytes = ip.getAddress();
+	// for (byte b : bytes) {
+	// System.out.println(b & 0xFF);
+	// }
+	// }
 
 	private void initializeVars() {
 		this.rooms = new HashMap<Integer, InetAddress>();
@@ -135,7 +174,7 @@ public class Model {
 			this.suitesList100.add(InetAddress.getByName("172.28.3.15"));
 			this.suitesList100.add(InetAddress.getByName("172.28.3.16"));
 			this.rooms.put(108, InetAddress.getByName("172.28.3.17"));
-			
+
 			// data for room 200x
 			this.rooms.put(201, InetAddress.getByName("172.28.3.18"));
 			this.rooms.put(202, InetAddress.getByName("172.28.3.19"));
@@ -145,7 +184,7 @@ public class Model {
 			this.suitesList200.add(InetAddress.getByName("172.28.3.23"));
 			this.suitesList200.add(InetAddress.getByName("172.28.3.24"));
 			this.rooms.put(208, InetAddress.getByName("172.28.3.25"));
-			
+
 			// data for room 300x
 			this.rooms.put(301, InetAddress.getByName("172.28.3.26"));
 			this.rooms.put(302, InetAddress.getByName("172.28.3.27"));
@@ -154,7 +193,7 @@ public class Model {
 			this.rooms.put(305, InetAddress.getByName("172.28.3.30"));
 			this.suitesList300.add(InetAddress.getByName("172.28.3.31"));
 			this.suitesList300.add(InetAddress.getByName("172.28.3.32"));
-			
+
 			// data for rooms 400x
 			this.rooms.put(401, InetAddress.getByName("172.28.3.34"));
 			this.rooms.put(402, InetAddress.getByName("172.28.3.35"));
@@ -164,7 +203,7 @@ public class Model {
 			this.rooms.put(406, InetAddress.getByName("172.28.3.47"));
 			this.rooms.put(407, InetAddress.getByName("172.28.3.46"));
 			this.rooms.put(408, InetAddress.getByName("172.28.3.45"));
-			
+
 			// data for rooms 500x
 			this.rooms.put(501, InetAddress.getByName("172.28.3.56"));
 			this.rooms.put(502, InetAddress.getByName("172.28.3.55"));
@@ -174,39 +213,36 @@ public class Model {
 			this.rooms.put(506, InetAddress.getByName("172.28.3.51"));
 			this.rooms.put(507, InetAddress.getByName("172.28.3.52"));
 			this.rooms.put(508, InetAddress.getByName("172.28.3.57"));
-			
-		} 
-		catch (UnknownHostException e) {
+
+		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 
 	}
 
 	public void handleSuite(int roomExtension) {
-		if(roomExtension == 106) {
+		if (roomExtension == 106) {
 			removeSuite106();
-		}
-		else if(roomExtension == 206) {
+		} else if (roomExtension == 206) {
 			removeSuite206();
-		}
-		else if(roomExtension == 306) {
+		} else if (roomExtension == 306) {
 			removeSuite306();
 		}
-		 
+
 	}
 
 	private void removeSuite306() {
-		
+
 	}
+
 	private void removeSuite206() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	private void removeSuite106() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
