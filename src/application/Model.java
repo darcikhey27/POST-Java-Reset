@@ -26,20 +26,34 @@ import java.util.Base64;
 public class Model {
 
 	public void executePost() throws IOException {
-			URL url = new URL("http://10.90.1.134/advanced_update.htm?reboot=Reboot");
+		// reset missed calls
+		// URL url = new URL("http://10.90.1.134/index.htm?misseddel=0");
 
-			String encoding = Base64.getEncoder().encodeToString(new String("admin:mKHyJQkDWu2hQ9Ng").getBytes());
+		// reset missed calls
+		// http://10.90.1.134/index.htm?misseddel=0
+		// URL url = new URL("http://10.90.1.134/index.htm?misseddel=0");
+		// reset dialed calls
+		// http://10.90.1.134/index.htm?dialeddel=0
+		//URL url = new URL("http://10.90.1.134/index.htm?dialeddel=0");
+		// reset recieved calls
+		// http://10.90.1.134/index.htm?receiveddel=0
+		// URL url = new URL("http://10.90.1.134/index.htm?receiveddel=0");
+		// reboot
+		// http://10.90.1.134/advanced_update.htm?reboot=Reboot
+		URL url = new URL("http://10.90.1.134/advanced_update.htm?reboot=Reboot");
+		
+		String encoding = Base64.getEncoder().encodeToString(new String("admin:mKHyJQkDWu2hQ9Ng").getBytes());
 
-			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-			connection.setRequestMethod("POST");
-			connection.setDoOutput(true);
-			connection.setRequestProperty("Authorization", "Basic " + encoding);
-			connection.connect();
-			InputStream content = (InputStream) connection.getInputStream();
-			BufferedReader in = new BufferedReader(new InputStreamReader(content));
-			String line;
-			while ((line = in.readLine()) != null) {
-				System.out.println(line);
-			}
-		} 
+		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+		connection.setRequestMethod("POST");
+		connection.setDoOutput(true);
+		connection.setRequestProperty("Authorization", "Basic " + encoding);
+		connection.connect();
+		InputStream content = (InputStream) connection.getInputStream();
+		BufferedReader in = new BufferedReader(new InputStreamReader(content));
+		String line;
+		while ((line = in.readLine()) != null) {
+			System.out.println(line);
+		}
+	}
 }

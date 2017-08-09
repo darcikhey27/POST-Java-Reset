@@ -27,13 +27,17 @@ public class Controller implements Initializable  {
 			
 			//modelTest.executePost3();
 			modelTest.executePost();
+			//modelTest.executeClearDialed();
+			//modelTest.executeClearMissed();
+			//modelTest.executeClearRecieved();
+			//modelTeset.executeReboot();
 			
 			
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("--- Error executing POST message ---");
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		System.out.println("POST request was executed on ip address");
 		statusLabel.setText("POST request was sent");
