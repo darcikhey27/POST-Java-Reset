@@ -38,6 +38,10 @@ public class Model {
 	public Model() {
 		// initialize data structure here
 		initializeTable();
+
+	}
+
+	private void setIPAddress() {
 		InetAddress ip = null;
 		try {
 			// read the ip addresses from a file maybe??

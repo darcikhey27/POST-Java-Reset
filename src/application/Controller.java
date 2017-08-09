@@ -46,8 +46,11 @@ public class Controller implements Initializable  {
 	
 	@FXML 
 	public void buttonClick(ActionEvent event) {
+		printConsole("buttonClick()");
 		Button btn = (Button) event.getSource();
-		String roomExtension = btn.getId();
+		String roomExtension = btn.getText();
+		printConsole(roomExtension);
+		showExtension(roomExtension);
 		
 		modelTest.resetMissedCalls(roomExtension);
 		
@@ -58,6 +61,16 @@ public class Controller implements Initializable  {
 		modelTest.rebootNode(roomExtension);
 	}
 	
+	
+	private void printConsole(String string) {
+		System.out.println(string);
+		
+	}
+
+	private void showExtension(String roomExtension) {
+		statusLabel.setText(roomExtension);
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
