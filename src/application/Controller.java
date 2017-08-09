@@ -49,8 +49,7 @@ public class Controller implements Initializable  {
 	public void buttonClick(ActionEvent event) {
 		printConsole("buttonClick()");
 		Button btn = (Button) event.getSource();
-		String roomExtension = btn.getText();
-		printConsole(roomExtension);
+		int roomExtension = Integer.parseInt(btn.getText());
 		showExtension(roomExtension);
 		
 		if(isSuite(roomExtension)) {
@@ -69,7 +68,7 @@ public class Controller implements Initializable  {
 	}
 	
 	
-	private boolean isSuite(String roomExtension) {
+	private boolean isSuite(int roomExtension) {
 		return false;
 	}
 
@@ -78,8 +77,8 @@ public class Controller implements Initializable  {
 		
 	}
 
-	private void showExtension(String roomExtension) {
-		statusLabel.setText(roomExtension);
+	private void showExtension(int roomExtension) {
+		statusLabel.setText(roomExtension+"");
 	}
 
 	@Override

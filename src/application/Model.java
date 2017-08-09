@@ -18,6 +18,8 @@ import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
 
@@ -27,18 +29,22 @@ import java.util.Base64;
 
 public class Model {
 
-	private String IPaddress;
 	private final String RESET_MISSED = "/index.htm?misseddel=0";
 	private final String RESET_DIALED = "/index.htm?dialeddel=0";
 	private final String REST_RECIEVED = "/index.htm?receiveddel=0";
 	private final String REBOOT = "/advanced_update.htm?reboot=Reboot";
 	private final String PROTOCOL = "http://";
 	private HashMap<Integer, InetAddress> rooms;
-	private HashMap<Integer, InetAddress> suites;
+	private List<InetAddress> suitesList100;
+	private List<InetAddress> suitesList200;
+	private List<InetAddress> suitesList300;
+	
+	private URL url = null;
+	private String IPaddress;
 
 	public Model() {
 		// initialize data structure here
-		initializeTable();
+		initializeVars();
 
 	}
 
@@ -76,22 +82,24 @@ public class Model {
 		}
 	}
 
-	public void resetMissedCalls(String roomExtension) {
+	public void resetMissedCalls(int roomExtension) {
 		// execute post to rest the missed calls
+		//Integer roomNumber = rooms.get(key)
+		this.IPaddress = rooms.get(key)
 
 	}
 
-	public void restDialedCalls(String roomExtension) {
+	public void restDialedCalls(int roomExtension) {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void resetRecievedCalls(String roomExtension) {
+	public void resetRecievedCalls(int roomExtension) {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void rebootNode(String roomExtension) {
+	public void rebootNode(int roomExtension) {
 		// TODO Auto-generated method stub
 
 	}
@@ -111,20 +119,61 @@ public class Model {
 		}
 	}
 
-	private void initializeTable() {
+	private void initializeVars() {
 		this.rooms = new HashMap<Integer, InetAddress>();
-		this.suites = new HashMap<Integer, InetAddress>();
+		this.suitesList100 = new LinkedList<InetAddress>();
+		this.suitesList200 = new LinkedList<InetAddress>();
+		this.suitesList300 = new LinkedList<InetAddress>();
 
 		try {
+			// data for room 100x
 			this.rooms.put(101, InetAddress.getByName("172.28.3.10"));
 			this.rooms.put(102, InetAddress.getByName("172.28.3.11"));
 			this.rooms.put(103, InetAddress.getByName("172.28.3.12"));
 			this.rooms.put(104, InetAddress.getByName("172.28.3.13"));
 			this.rooms.put(105, InetAddress.getByName("172.28.3.14"));
+			this.suitesList100.add(InetAddress.getByName("172.28.3.15"));
+			this.suitesList100.add(InetAddress.getByName("172.28.3.16"));
+			this.rooms.put(108, InetAddress.getByName("172.28.3.17"));
 			
-			this.suites.put(106, InetAddress.getByName("172.28.3.15"));
-			this.suites.put(106, InetAddress.getByName("172.28.3.16"));
+			// data for room 200x
+			this.rooms.put(201, InetAddress.getByName("172.28.3.18"));
+			this.rooms.put(202, InetAddress.getByName("172.28.3.19"));
+			this.rooms.put(203, InetAddress.getByName("172.28.3.20"));
+			this.rooms.put(204, InetAddress.getByName("172.28.3.21"));
+			this.rooms.put(205, InetAddress.getByName("172.28.3.22"));
+			this.suitesList200.add(InetAddress.getByName("172.28.3.23"));
+			this.suitesList200.add(InetAddress.getByName("172.28.3.24"));
+			this.rooms.put(208, InetAddress.getByName("172.28.3.25"));
 			
+			// data for room 300x
+			this.rooms.put(301, InetAddress.getByName("172.28.3.26"));
+			this.rooms.put(302, InetAddress.getByName("172.28.3.27"));
+			this.rooms.put(303, InetAddress.getByName("172.28.3.28"));
+			this.rooms.put(304, InetAddress.getByName("172.28.3.29"));
+			this.rooms.put(305, InetAddress.getByName("172.28.3.30"));
+			this.suitesList300.add(InetAddress.getByName("172.28.3.31"));
+			this.suitesList300.add(InetAddress.getByName("172.28.3.32"));
+			
+			// data for rooms 400x
+			this.rooms.put(401, InetAddress.getByName("172.28.3.34"));
+			this.rooms.put(402, InetAddress.getByName("172.28.3.35"));
+			this.rooms.put(403, InetAddress.getByName("172.28.3.36"));
+			this.rooms.put(404, InetAddress.getByName("172.28.3.48"));
+			this.rooms.put(405, InetAddress.getByName("172.28.3.49"));
+			this.rooms.put(406, InetAddress.getByName("172.28.3.47"));
+			this.rooms.put(407, InetAddress.getByName("172.28.3.46"));
+			this.rooms.put(408, InetAddress.getByName("172.28.3.45"));
+			
+			// data for rooms 500x
+			this.rooms.put(501, InetAddress.getByName("172.28.3.56"));
+			this.rooms.put(502, InetAddress.getByName("172.28.3.55"));
+			this.rooms.put(503, InetAddress.getByName("172.28.3.53"));
+			this.rooms.put(504, InetAddress.getByName("172.28.3.54"));
+			this.rooms.put(505, InetAddress.getByName("172.28.3.50"));
+			this.rooms.put(506, InetAddress.getByName("172.28.3.51"));
+			this.rooms.put(507, InetAddress.getByName("172.28.3.52"));
+			this.rooms.put(508, InetAddress.getByName("172.28.3.57"));
 			
 		} 
 		catch (UnknownHostException e) {
@@ -135,14 +184,14 @@ public class Model {
 
 	}
 
-	public void handleSuite(String roomExtension) {
-		if(roomExtension.equals("106")) {
+	public void handleSuite(int roomExtension) {
+		if(roomExtension == 106) {
 			removeSuite106();
 		}
-		else if(roomExtension.equals("206")) {
+		else if(roomExtension == 206) {
 			removeSuite206();
 		}
-		else if(roomExtension.equals("306")) {
+		else if(roomExtension == 306) {
 			removeSuite306();
 		}
 		 
