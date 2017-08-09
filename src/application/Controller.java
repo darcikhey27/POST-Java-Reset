@@ -53,6 +53,12 @@ public class Controller implements Initializable  {
 		printConsole(roomExtension);
 		showExtension(roomExtension);
 		
+		if(isSuite(roomExtension)) {
+			modelTest.handleSuite(roomExtension);
+			return;
+			
+		}
+		
 		modelTest.resetMissedCalls(roomExtension);
 		
 		modelTest.restDialedCalls(roomExtension);
@@ -63,6 +69,10 @@ public class Controller implements Initializable  {
 	}
 	
 	
+	private boolean isSuite(String roomExtension) {
+		return false;
+	}
+
 	private void printConsole(String string) {
 		System.out.println(string);
 		

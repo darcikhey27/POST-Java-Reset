@@ -33,32 +33,13 @@ public class Model {
 	private final String REST_RECIEVED = "/index.htm?receiveddel=0";
 	private final String REBOOT = "/advanced_update.htm?reboot=Reboot";
 	private final String PROTOCOL = "http://";
-	private HashMap<Integer, String> table;
+	private HashMap<Integer, InetAddress> rooms;
+	private HashMap<Integer, InetAddress> suites;
 
 	public Model() {
 		// initialize data structure here
 		initializeTable();
 
-	}
-
-	private void setIPAddress() {
-		InetAddress ip = null;
-		try {
-			// read the ip addresses from a file maybe??
-			ip = InetAddress.getByName("192.168.2.1");
-		} 
-		catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		byte[] bytes = ip.getAddress();
-		for (byte b : bytes) {
-			System.out.println(b & 0xFF);
-		}
-	}
-
-	private void initializeTable() {
-		this.table = new HashMap<Integer, String>();
 	}
 
 	public void executePost() throws IOException {
@@ -113,5 +94,70 @@ public class Model {
 	public void rebootNode(String roomExtension) {
 		// TODO Auto-generated method stub
 
+	}
+
+	private void setIPAddress() {
+		InetAddress ip = null;
+		try {
+			// read the ip addresses from a file maybe??
+			ip = InetAddress.getByName("192.168.2.1");
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		byte[] bytes = ip.getAddress();
+		for (byte b : bytes) {
+			System.out.println(b & 0xFF);
+		}
+	}
+
+	private void initializeTable() {
+		this.rooms = new HashMap<Integer, InetAddress>();
+		this.suites = new HashMap<Integer, InetAddress>();
+
+		try {
+			this.rooms.put(101, InetAddress.getByName("172.28.3.10"));
+			this.rooms.put(102, InetAddress.getByName("172.28.3.11"));
+			this.rooms.put(103, InetAddress.getByName("172.28.3.12"));
+			this.rooms.put(104, InetAddress.getByName("172.28.3.13"));
+			this.rooms.put(105, InetAddress.getByName("172.28.3.14"));
+			
+			this.suites.put(106, InetAddress.getByName("172.28.3.15"));
+			this.suites.put(106, InetAddress.getByName("172.28.3.16"));
+			
+			
+		} 
+		catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+	}
+
+	public void handleSuite(String roomExtension) {
+		if(roomExtension.equals("106")) {
+			removeSuite106();
+		}
+		else if(roomExtension.equals("206")) {
+			removeSuite206();
+		}
+		else if(roomExtension.equals("306")) {
+			removeSuite306();
+		}
+		 
+	}
+
+	private void removeSuite306() {
+		
+	}
+	private void removeSuite206() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void removeSuite106() {
+		// TODO Auto-generated method stub
+		
 	}
 }
