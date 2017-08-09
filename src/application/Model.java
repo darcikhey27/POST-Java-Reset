@@ -24,7 +24,18 @@ import javax.net.ssl.HttpsURLConnection;
 import java.util.Base64;
 
 public class Model {
-
+	
+	private String IPaddress;
+	private final String RESET_MISSED = "/index.htm?misseddel=0";
+	private final String RESET_DIALED = "/index.htm?dialeddel=0";
+	private final String REST_RECIEVED = "/index.htm?receiveddel=0";
+	private final String REBOOT = "/advanced_update.htm?reboot=Reboot";
+	
+	public Model() {
+		//initialize data structure here
+		//
+		
+	}
 	public void executePost() throws IOException {
 		// reset missed calls
 		// URL url = new URL("http://10.90.1.134/index.htm?misseddel=0");
@@ -57,5 +68,21 @@ public class Model {
 		while ((line = in.readLine()) != null) {
 			System.out.println(line);
 		}
+	}
+	public void resetMissedCalls(String roomExtension) {
+		// execute post to rest the missed calls 
+		
+	}
+	public void restDialedCalls(String roomExtension) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void resetRecievedCalls(String roomExtension) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void rebootNode(String roomExtension) {
+		// TODO Auto-generated method stub
+		
 	}
 }

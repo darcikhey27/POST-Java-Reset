@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class Controller implements Initializable  {
@@ -15,6 +16,7 @@ public class Controller implements Initializable  {
 	@FXML private Label statusLabel;
 	
 	
+	private Model modelTest;
 	
 	
 	@FXML
@@ -22,7 +24,7 @@ public class Controller implements Initializable  {
 		// execute a linux command here and show the output in the 
 		// statusLabel
 		System.out.println("Button was clicked");
-		Model modelTest = new Model();
+		//
 		try {
 			
 			//modelTest.executePost3();
@@ -31,8 +33,6 @@ public class Controller implements Initializable  {
 			//modelTest.executeClearMissed();
 			//modelTest.executeClearRecieved();
 			//modelTeset.executeReboot();
-			
-			
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -44,9 +44,27 @@ public class Controller implements Initializable  {
 		
 	}
 	
+	@FXML 
+	public void buttonClick(ActionEvent event) {
+		Button btn = (Button) event.getSource();
+		String roomExtension = btn.getId();
+		
+		modelTest.resetMissedCalls(roomExtension);
+		
+		modelTest.restDialedCalls(roomExtension);
+		
+		modelTest.resetRecievedCalls(roomExtension);
+		
+		modelTest.rebootNode(roomExtension);
+	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		// Initiazlie our data structure here
+		// have a hashamp that contains button.text to ip.address 
+		// and go from theree
+		this.modelTest = new Model();
 		
 	}
 	
