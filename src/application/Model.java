@@ -48,6 +48,8 @@ public class Model {
 		connection.setRequestMethod("POST");
 		connection.setDoOutput(true);
 		connection.setRequestProperty("Authorization", "Basic " + encoding);
+		// might not need this connect. 
+		// or I might not need to create an InputStream because I'm just sending 
 		connection.connect();
 		InputStream content = (InputStream) connection.getInputStream();
 		BufferedReader in = new BufferedReader(new InputStreamReader(content));
