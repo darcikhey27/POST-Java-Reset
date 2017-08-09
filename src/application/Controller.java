@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 
 public class Controller implements Initializable  {
 
@@ -28,7 +29,7 @@ public class Controller implements Initializable  {
 		try {
 			
 			//modelTest.executePost3();
-			modelTest.executePost();
+			//modelTest.executePost();
 			//modelTest.executeClearDialed();
 			//modelTest.executeClearMissed();
 			//modelTest.executeClearRecieved();

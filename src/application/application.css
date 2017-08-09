@@ -1,0 +1,8 @@
+AnchorPane {
+	-fx-background-color: rgb(232, 225, 215);
+	/*-fx-background-image: url("rabbit-150x150.png"); */
+}
+
+Label {
+	-fx-text-fill: #660000;
+}
