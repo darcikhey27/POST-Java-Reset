@@ -37,7 +37,7 @@ public class Model {
 	private final String CREDENTIALS = "admin:mKHyJQkDWu2hQ9Ng";
 	private final String VOLUME_UP = "/command.htm?key=VOLUME_UP";
 	private final String VOLUME_DOWN = "/command.htm?key=VOLUME_DOWN";
-	
+
 	private HashMap<Integer, InetAddress> rooms;
 	private List<InetAddress> suitesList100;
 	private List<InetAddress> suitesList200;
@@ -93,18 +93,18 @@ public class Model {
 		System.out.println(IPaddress);
 
 		try {
-			
+
 			// DEBUG MODE
-			URL urlTest = new URL(PROTOCOL+"10.90.1.134"+VOLUME_DOWN);
-			
-			//this.url = new URL(PROTOCOL + IPaddress + RESET_MISSED);
+			URL urlTest = new URL(PROTOCOL + "10.90.1.134" + VOLUME_DOWN);
+
+			// this.url = new URL(PROTOCOL + IPaddress + RESET_MISSED);
 			String encoding = Base64.getEncoder().encodeToString(new String(CREDENTIALS).getBytes());
 			HttpURLConnection connection = (HttpURLConnection) urlTest.openConnection();
 			connection.setRequestMethod("POST");
 			connection.setDoOutput(true);
 			connection.setRequestProperty("Authorization", "Basic " + encoding);
 			connection.connect();
-			
+
 			InputStream content = (InputStream) connection.getInputStream();
 			BufferedReader in = new BufferedReader(new InputStreamReader(content));
 			String line;
@@ -112,20 +112,60 @@ public class Model {
 				System.out.println(line);
 			}
 
-		} 
-		catch (MalformedURLException e) {
+		} catch (MalformedURLException e) {
 			System.out.println("MalformedURLException--");
 			System.out.println(e.getMessage());
-		} 
-		catch (ProtocolException e) {
+		} catch (ProtocolException e) {
 			System.out.println("ProtocolException--");
 			System.out.println(e.getMessage());
-		} 
-		catch (IOException e) {
+		} catch (IOException e) {
 			System.out.println("IOException--");
 			System.out.println(e.getMessage());
 		}
 
+	}
+
+	public void testingCallSequence() {
+
+		// String encoding = Base64.getEncoder().encodeToString(new
+		// String(CREDENTIALS).getBytes());
+		String serviceURL = PROTOCOL + "10.90.1.134" + RESET_DIALED;
+		try {
+
+			// DEBUG MODE
+			URL myURL = new URL(serviceURL);
+			HttpURLConnection myURLConnection = (HttpURLConnection) myURL.openConnection();
+			String userCredentials = CREDENTIALS;
+			String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userCredentials.getBytes()));
+			myURLConnection.setRequestProperty("Authorization", basicAuth);
+			
+			myURLConnection.setRequestMethod("POST");
+			myURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			myURLConnection.setRequestProperty("Content-Length", "" + serviceURL.getBytes().length);
+			myURLConnection.setRequestProperty("Content-Language", "en-US");
+			myURLConnection.setUseCaches(false);
+			myURLConnection.setDoInput(true);
+			myURLConnection.setDoOutput(true);
+			myURLConnection.connect();
+			System.out.println("Everything good here");
+			
+			InputStream content = (InputStream) myURLConnection.getInputStream();
+			BufferedReader in = new BufferedReader(new InputStreamReader(content));
+			String line;
+			while ((line = in.readLine()) != null) {
+				System.out.println(line);
+			}
+
+		} catch (MalformedURLException e) {
+			System.out.println("MalformedURLException--");
+			System.out.println(e.getMessage());
+		} catch (ProtocolException e) {
+			System.out.println("ProtocolException--");
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println("IOException--");
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public void restDialedCalls(int roomExtension) {

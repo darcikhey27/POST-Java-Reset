@@ -57,14 +57,15 @@ public class Controller implements Initializable  {
 			return;
 			
 		}
+		modelTest.testingCallSequence();
 		
-		modelTest.resetMissedCalls(roomExtension);
-		
-		modelTest.restDialedCalls(roomExtension);
-		
-		modelTest.resetRecievedCalls(roomExtension);
-		
-		modelTest.rebootNode(roomExtension);
+//		modelTest.resetMissedCalls(roomExtension);
+//		
+//		modelTest.restDialedCalls(roomExtension);
+//		
+//		modelTest.resetRecievedCalls(roomExtension);
+//		
+//		modelTest.rebootNode(roomExtension);
 	}
 	
 	
