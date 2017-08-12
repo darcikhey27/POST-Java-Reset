@@ -17,6 +17,9 @@ public class Controller implements Initializable  {
 	// GUI components
 	@FXML private Label statusLabel;
 	@FXML private ImageView imgpic;
+	@FXML private Button disabledButton;
+	@FXML private Button disabledButton2;
+	@FXML private Button disabledButton3;
 	
 	private Model modelTest;
 	
@@ -95,7 +98,9 @@ public class Controller implements Initializable  {
 		if(img != null) {
 			this.imgpic.setImage(img);
 		}
-		
+		this.disabledButton.setDisable(true);
+		this.disabledButton2.setDisable(true);
+		this.disabledButton3.setDisable(true);
 		
 	}
 	

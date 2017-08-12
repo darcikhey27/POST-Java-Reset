@@ -37,7 +37,7 @@
             <Button layoutX="110.0" layoutY="10.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="104" GridPane.columnIndex="3" />
             <Button layoutX="160.0" layoutY="10.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="105" GridPane.columnIndex="4" />
             <Button layoutX="210.0" layoutY="10.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="106" GridPane.columnIndex="5" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="107" GridPane.columnIndex="6" />
+            <Button fx:id="disabledButton3" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="107" GridPane.columnIndex="6" />
             <Button layoutX="311.0" layoutY="10.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="108" GridPane.columnIndex="7" />
             <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="201" GridPane.rowIndex="1" />
             <Button layoutX="10.0" layoutY="41.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="202" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -45,7 +45,7 @@
             <Button layoutX="110.0" layoutY="41.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="204" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <Button layoutX="160.0" layoutY="41.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="205" GridPane.columnIndex="4" GridPane.rowIndex="1" />
             <Button layoutX="210.0" layoutY="41.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="206" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-            <Button layoutX="260.0" layoutY="41.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="207" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+            <Button fx:id="disabledButton2" layoutX="260.0" layoutY="41.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="207" GridPane.columnIndex="6" GridPane.rowIndex="1" />
             <Button layoutX="311.0" layoutY="41.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="208" GridPane.columnIndex="7" GridPane.rowIndex="1" />
             <Button layoutX="10.0" layoutY="64.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="301" GridPane.rowIndex="2" />
             <Button layoutX="10.0" layoutY="15.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="302" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -53,7 +53,7 @@
             <Button layoutX="110.0" layoutY="114.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="304" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <Button layoutX="10.0" layoutY="15.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="305" GridPane.columnIndex="4" GridPane.rowIndex="2" />
             <Button layoutX="10.0" layoutY="15.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="306" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-            <Button layoutX="260.0" layoutY="114.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="307" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+            <Button fx:id="disabledButton" layoutX="260.0" layoutY="114.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="307" GridPane.columnIndex="6" GridPane.rowIndex="2" />
             <Button layoutX="311.0" layoutY="114.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="308" GridPane.columnIndex="7" GridPane.rowIndex="2" />
             <Button layoutX="10.0" layoutY="114.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="401" GridPane.rowIndex="3" />
             <Button layoutX="10.0" layoutY="158.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="402" GridPane.columnIndex="1" GridPane.rowIndex="3" />
