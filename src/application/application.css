@@ -11,5 +11,5 @@ Button {
 	-fx-color: gray;
 	-fx-text-fill: white;
 	-fx-background-radius: 3px;
-	-fx-font-size: 2em;
+	/* -fx-font-size: 2em; */
 }
