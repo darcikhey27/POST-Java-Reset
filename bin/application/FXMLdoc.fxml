@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -25,6 +26,7 @@
           <RowConstraints maxHeight="124.0" minHeight="10.0" prefHeight="124.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="124.0" minHeight="10.0" prefHeight="124.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="124.0" minHeight="10.0" prefHeight="124.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="124.0" minHeight="10.0" prefHeight="124.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="124.0" minHeight="10.0" prefHeight="124.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="124.0" minHeight="10.0" prefHeight="124.0" vgrow="SOMETIMES" />
         </rowConstraints>
@@ -71,16 +73,17 @@
             <Button layoutX="10.0" layoutY="15.0" mnemonicParsing="false" onAction="#buttonClick" prefHeight="80.0" prefWidth="88.0" text="508" GridPane.columnIndex="7" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Label layoutX="271.0" layoutY="43.0" prefHeight="29.0" prefWidth="189.0" text="Phone reset">
+      <Label layoutX="271.0" layoutY="43.0" prefHeight="29.0" prefWidth="229.0" text="Phone reseting App">
          <font>
             <Font name="Apple Braille" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="51.0" layoutY="22.0" prefHeight="29.0" prefWidth="189.0" text="Gamble Sands">
+      <Label layoutX="27.0" layoutY="14.0" prefHeight="29.0" prefWidth="189.0" text="Gamble Sands">
          <font>
             <Font name="Apple Braille" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="statusLabel" layoutX="27.0" layoutY="451.0" text="Label" />
+      <Label fx:id="statusLabel" layoutX="27.0" layoutY="451.0" prefHeight="17.0" prefWidth="200.0" text="Status.." />
+      <ImageView fx:id="imgpic" fitHeight="150.0" fitWidth="200.0" layoutX="260.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

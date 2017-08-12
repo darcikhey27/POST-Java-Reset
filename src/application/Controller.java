@@ -9,13 +9,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
-
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 public class Controller implements Initializable  {
 
 	
 	// GUI components
 	@FXML private Label statusLabel;
-	
+	@FXML private ImageView imgpic;
 	
 	private Model modelTest;
 	
@@ -89,6 +90,12 @@ public class Controller implements Initializable  {
 		// have a hashamp that contains button.text to ip.address 
 		// and go from theree
 		this.modelTest = new Model();
+		Image img = null;
+		img = new Image("file:src/application/rabbit-150x150.png");
+		if(img != null) {
+			this.imgpic.setImage(img);
+		}
+		
 		
 	}
 	

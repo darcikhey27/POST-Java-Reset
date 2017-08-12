@@ -5,11 +5,16 @@ AnchorPane {
 
 Label {
 	-fx-text-fill: #660000;
+	-fx-font-size: 1.8em;
+}
+#statusLabel {
+	-fx-text-fill: #660000;
+	-fx-font-size: 1.5em;
 }
 
 Button {
 	-fx-color: gray;
 	-fx-text-fill: white;
 	-fx-background-radius: 3px;
-	/* -fx-font-size: 2em; */
+	-fx-font-size: 2em;
 }
