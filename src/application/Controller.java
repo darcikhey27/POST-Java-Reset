@@ -59,13 +59,17 @@ public class Controller implements Initializable  {
 		if(isSuite(roomExtension)) {
 			statusLabel.setText("Resseting suite "+roomExtension);
 			System.out.println("Resseting suite "+ roomExtension);
+			//TODO: put a sleep(1) here so we can see status for suites
 			modelTest.handleSuite(roomExtension);
 			statusLabel.setText("Status..");
 			return;
 			
 		}
 		statusLabel.setText("Deleting missed Calls for "+roomExtension);
+		sleep(2);
 		modelTest.testingCallSequence();
+		sleep(2);
+		statusLabel.setText("Finished");
 		
 //		modelTest.resetMissedCalls(roomExtension);
 //		
@@ -77,6 +81,16 @@ public class Controller implements Initializable  {
 	}
 	
 	
+	private void sleep(int i) {
+		try {
+			Thread.sleep(i * 1000);
+		} 
+		catch (InterruptedException e) {
+			System.out.println(e.getMessage());
+		}
+		
+	}
+
 	private boolean isSuite(int roomExtension) {
 		// check if the roomExtension is 106 or 206 or 306
 		if(roomExtension == 106 || roomExtension == 206 || roomExtension == 306) {

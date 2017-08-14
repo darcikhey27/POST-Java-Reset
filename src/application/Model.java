@@ -132,9 +132,10 @@ public class Model {
 
 		// String encoding = Base64.getEncoder().encodeToString(new
 		// String(CREDENTIALS).getBytes());
+		
 		String serviceURL = PROTOCOL + "10.90.1.134" + VOLUME_UP;
 		try {
-
+			
 			// DEBUG MODE
 			URL myURL = new URL(serviceURL);
 			HttpURLConnection myURLConnection = (HttpURLConnection) myURL.openConnection();
