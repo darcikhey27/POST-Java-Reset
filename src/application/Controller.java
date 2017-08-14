@@ -74,6 +74,7 @@ public class Controller implements Initializable  {
 	
 	
 	private boolean isSuite(int roomExtension) {
+		// check if the roomExtension is 
 		return false;
 	}
 
@@ -94,7 +95,7 @@ public class Controller implements Initializable  {
 		// and go from theree
 		this.modelTest = new Model();
 		Image img = null;
-		img = new Image("file:src/application/rabbit-150x150.png");
+		img = new Image("file:src/application/gamble-sands-white.png");
 		if(img != null) {
 			this.imgpic.setImage(img);
 		}

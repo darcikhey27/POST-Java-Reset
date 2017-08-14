@@ -112,13 +112,16 @@ public class Model {
 				System.out.println(line);
 			}
 
-		} catch (MalformedURLException e) {
+		} 
+		catch (MalformedURLException e) {
 			System.out.println("MalformedURLException--");
 			System.out.println(e.getMessage());
-		} catch (ProtocolException e) {
+		} 
+		catch (ProtocolException e) {
 			System.out.println("ProtocolException--");
 			System.out.println(e.getMessage());
-		} catch (IOException e) {
+		} 
+		catch (IOException e) {
 			System.out.println("IOException--");
 			System.out.println(e.getMessage());
 		}
