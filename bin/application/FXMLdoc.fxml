@@ -83,7 +83,7 @@
             <Font name="Apple Braille" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="statusLabel" layoutX="27.0" layoutY="451.0" prefHeight="17.0" prefWidth="200.0" text="Status.." />
-      <ImageView fx:id="imgpic" fitHeight="150.0" fitWidth="200.0" layoutX="260.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="statusLabel" layoutX="27.0" layoutY="451.0" prefHeight="17.0" prefWidth="440.0" text="Status.." />
+      <ImageView fx:id="imgpic" fitHeight="150.0" fitWidth="200.0" layoutX="517.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

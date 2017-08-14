@@ -57,10 +57,14 @@ public class Controller implements Initializable  {
 		showExtension(roomExtension);
 		
 		if(isSuite(roomExtension)) {
+			statusLabel.setText("Resseting suite "+roomExtension);
+			System.out.println("Resseting suite "+ roomExtension);
 			modelTest.handleSuite(roomExtension);
+			statusLabel.setText("Status..");
 			return;
 			
 		}
+		statusLabel.setText("Deleting missed Calls for "+roomExtension);
 		modelTest.testingCallSequence();
 		
 //		modelTest.resetMissedCalls(roomExtension);
@@ -74,7 +78,11 @@ public class Controller implements Initializable  {
 	
 	
 	private boolean isSuite(int roomExtension) {
-		// check if the roomExtension is 
+		// check if the roomExtension is 106 or 206 or 306
+		if(roomExtension == 106 || roomExtension == 206 || roomExtension == 306) {
+			statusLabel.setText("is suite "+ roomExtension);
+			return true;
+		}
 		return false;
 	}
 

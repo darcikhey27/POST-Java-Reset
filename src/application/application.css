@@ -9,7 +9,7 @@ Label {
 }
 #statusLabel {
 	-fx-text-fill: #660000;
-	-fx-font-size: 1.5em;
+	-fx-font-size: 1.2em;
 }
 
 Button {
