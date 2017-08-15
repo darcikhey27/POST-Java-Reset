@@ -102,7 +102,6 @@ public class Controller implements Initializable  {
 
 	private void printConsole(String string) {
 		System.out.println(string);
-		
 	}
 
 	private void showExtension(int roomExtension) {
