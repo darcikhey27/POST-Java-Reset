@@ -60,27 +60,11 @@ public class Model {
 		// execute post to rest the missed calls
 		// Integer roomNumber = rooms.get(key)
 		String IPaddress = "";
-		String serviceUrl = "";
 
 		IPaddress = rooms.get(roomExtension).getHostAddress();
-		System.out.println(IPaddress);
+		String serviceUrl = getUrl(mode, IPaddress);
 
-		if (mode.equals("missed")) {
-			serviceUrl = PROTOCOL + IPaddress + RESET_MISSED;
-			System.out.println("mode is missed");
-		}
-		else if (mode.equals("dialed")) {
-			serviceUrl = PROTOCOL + IPaddress + RESET_DIALED;
-			System.out.println("mode is dialed");
-		}
-		else if (mode.equals("recieved")) {
-			serviceUrl = PROTOCOL + IPaddress + REST_RECIEVED;
-			System.out.println("mode is recieved");
-		}
-		else if (mode.equals("reboot")) {
-			serviceUrl = PROTOCOL + IPaddress + REBOOT;
-			System.out.println("mode is reboot");
-		}
+		System.out.println(IPaddress);
 
 		try {
 
@@ -116,53 +100,25 @@ public class Model {
 
 	}
 
-	public void restDialedCalls(int roomExtension, String mode) {
-
-	}
-
-	public void resetRecievedCalls(int roomExtension, String mode) {
-
-	}
-
-	public void rebootNode(int roomExtension, String mode) {
-
-		this.encodinge = "Basic " + new String(Base64.getEncoder().encode(CREDENTIALS.getBytes()));
-		// user roomExtension instead of static ip string
-		String serviceURL = PROTOCOL + "10.90.1.134" + VOLUME_DOWN;
-		try {
-			this.url = new URL(serviceURL);
-			this.conn = (HttpURLConnection) this.url.openConnection();
-			this.conn.setRequestProperty("Authorization", this.encodinge);
-			this.conn.setRequestMethod("POST");
-			this.conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-			this.conn.setRequestProperty("Content-Length", "" + serviceURL.getBytes().length);
-			this.conn.setRequestProperty("Content-Language", "en-US");
-			this.conn.setUseCaches(false);
-			this.conn.setDoInput(true);
-			this.conn.setDoOutput(true);
-			this.conn.connect();
-
-			this.contento = (InputStream) conn.getInputStream();
-			this.inBuff = new BufferedReader(new InputStreamReader(contento));
-			String line;
-			while ((line = inBuff.readLine()) != null) {
-				System.out.println(line);
-			}
-
+	private String getUrl(String mode, String IPaddress) {
+		String serviceUrl = "";
+		if (mode.equals("missed")) {
+			serviceUrl = PROTOCOL + IPaddress + RESET_MISSED;
+			System.out.println("mode is missed");
 		}
-		catch (MalformedURLException e) {
-			System.out.println("MalformedURLException--");
-			System.out.println(e.getMessage());
+		else if (mode.equals("dialed")) {
+			serviceUrl = PROTOCOL + IPaddress + RESET_DIALED;
+			System.out.println("mode is dialed");
 		}
-		catch (ProtocolException e) {
-			System.out.println("ProtocolException--");
-			System.out.println(e.getMessage());
+		else if (mode.equals("recieved")) {
+			serviceUrl = PROTOCOL + IPaddress + REST_RECIEVED;
+			System.out.println("mode is recieved");
 		}
-		catch (IOException e) {
-			System.out.println("IOException--");
-			System.out.println(e.getMessage());
+		else if (mode.equals("reboot")) {
+			serviceUrl = PROTOCOL + IPaddress + REBOOT;
+			System.out.println("mode is reboot");
 		}
-
+		return serviceUrl;
 	}
 
 	private void removeSuite306() {
@@ -174,7 +130,7 @@ public class Model {
 	}
 
 	private void removeSuite106() {
-		// TODO Auto-generated method stub
+		
 
 	}
 

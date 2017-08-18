@@ -44,13 +44,13 @@ public class Controller implements Initializable  {
 //		sleep(2);
 //		statusLabel.setText("Finished");
 		
-		modelTest.resetMissedCalls(roomExtension, "missed");
+		modelTest.resetDevice(roomExtension, "missed");
 		
-		modelTest.restDialedCalls(roomExtension, "dialed");
+		modelTest.resetDevice(roomExtension, "dialed");
 		
-		modelTest.resetRecievedCalls(roomExtension, "recieved");
+		modelTest.resetDevice(roomExtension, "recieved");
 //		
-		modelTest.rebootNode(roomExtension, "reboot");
+		modelTest.resetDevice(roomExtension, "reboot");
 	}
 	
 	
