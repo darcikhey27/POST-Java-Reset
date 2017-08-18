@@ -51,7 +51,9 @@ public class Model {
 	private String encodinge;
 
 	public Model() {
-		// initialize data structure here
+		
+		
+		
 		initializeVars();
 
 	}
