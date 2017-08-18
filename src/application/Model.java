@@ -43,7 +43,12 @@ public class Model {
 	private List<InetAddress> suitesList200;
 	private List<InetAddress> suitesList300;
 
-	private URL url = null;
+	private URL url;
+	private HttpURLConnection conn;
+	private InputStream contento;
+	private BufferedReader inBuff;
+	private String linee;
+	private String encodinge;
 
 	public Model() {
 		// initialize data structure here
@@ -94,7 +99,7 @@ public class Model {
 
 		try {
 
-			// DEBUG MODE
+			// DEBUG MODE == using static IP instead of IPaddress
 			URL urlTest = new URL(PROTOCOL + "10.90.1.134" + VOLUME_DOWN);
 
 			// this.url = new URL(PROTOCOL + IPaddress + RESET_MISSED);
@@ -112,16 +117,13 @@ public class Model {
 				System.out.println(line);
 			}
 
-		} 
-		catch (MalformedURLException e) {
+		} catch (MalformedURLException e) {
 			System.out.println("MalformedURLException--");
 			System.out.println(e.getMessage());
-		} 
-		catch (ProtocolException e) {
+		} catch (ProtocolException e) {
 			System.out.println("ProtocolException--");
 			System.out.println(e.getMessage());
-		} 
-		catch (IOException e) {
+		} catch (IOException e) {
 			System.out.println("IOException--");
 			System.out.println(e.getMessage());
 		}
@@ -132,17 +134,17 @@ public class Model {
 
 		// String encoding = Base64.getEncoder().encodeToString(new
 		// String(CREDENTIALS).getBytes());
-		
+
 		String serviceURL = PROTOCOL + "10.90.1.134" + VOLUME_UP;
 		try {
-			
+
 			// DEBUG MODE
 			URL myURL = new URL(serviceURL);
 			HttpURLConnection myURLConnection = (HttpURLConnection) myURL.openConnection();
 			String userCredentials = CREDENTIALS;
 			String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userCredentials.getBytes()));
 			myURLConnection.setRequestProperty("Authorization", basicAuth);
-			
+
 			myURLConnection.setRequestMethod("POST");
 			myURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 			myURLConnection.setRequestProperty("Content-Length", "" + serviceURL.getBytes().length);
@@ -152,11 +154,48 @@ public class Model {
 			myURLConnection.setDoOutput(true);
 			myURLConnection.connect();
 			System.out.println("Everything good here");
-			
+
 			InputStream content = (InputStream) myURLConnection.getInputStream();
 			BufferedReader in = new BufferedReader(new InputStreamReader(content));
 			String line;
 			while ((line = in.readLine()) != null) {
+				System.out.println(line);
+			}
+
+		} catch (MalformedURLException e) {
+			System.out.println("MalformedURLException--");
+			System.out.println(e.getMessage());
+		} catch (ProtocolException e) {
+			System.out.println("ProtocolException--");
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println("IOException--");
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void restDialedCalls(int roomExtension) {
+		
+		this.encodinge = "Basic " + new String(Base64.getEncoder().encode(CREDENTIALS.getBytes()));
+		// user roomExtension instead of static ip string
+		String serviceURL = PROTOCOL + "10.90.1.134" + VOLUME_UP;
+		try {
+			this.url = new URL(serviceURL);
+			this.conn = (HttpURLConnection) this.url.openConnection();
+			this.conn.setRequestProperty("Authorization", this.encodinge);
+			this.conn.setRequestMethod("POST");
+			this.conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			this.conn.setRequestProperty("Content-Length", "" + serviceURL.getBytes().length);
+			this.conn.setRequestProperty("Content-Language", "en-US");
+			this.conn.setUseCaches(false);
+			this.conn.setDoInput(true);
+			this.conn.setDoOutput(true);
+			this.conn.connect();
+			
+			this.contento = (InputStream) conn.getInputStream();
+			this.inBuff = new BufferedReader(new InputStreamReader(contento));
+			String line;
+			while ((line = inBuff.readLine()) != null) {
 				System.out.println(line);
 			}
 
@@ -173,11 +212,6 @@ public class Model {
 			System.out.println("IOException--");
 			System.out.println(e.getMessage());
 		}
-	}
-
-	public void restDialedCalls(int roomExtension) {
-		// TODO Auto-generated method stub
-
 	}
 
 	public void resetRecievedCalls(int roomExtension) {

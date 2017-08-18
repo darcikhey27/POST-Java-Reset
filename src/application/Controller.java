@@ -23,32 +23,6 @@ public class Controller implements Initializable  {
 	
 	private Model modelTest;
 	
-	
-	@FXML
-	private void testButtonCommand(ActionEvent event) {
-		// execute a linux command here and show the output in the 
-		// statusLabel
-		System.out.println("Button was clicked");
-		//
-		try {
-			
-			//modelTest.executePost3();
-			//modelTest.executePost();
-			//modelTest.executeClearDialed();
-			//modelTest.executeClearMissed();
-			//modelTest.executeClearRecieved();
-			//modelTeset.executeReboot();
-		} 
-		catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println("--- Error executing POST message ---");
-			//e.printStackTrace();
-		}
-		System.out.println("POST request was executed on ip address");
-		statusLabel.setText("POST request was sent");
-		
-	}
-	
 	@FXML 
 	public void buttonClick(ActionEvent event) {
 		printConsole("buttonClick()");
@@ -63,15 +37,14 @@ public class Controller implements Initializable  {
 			modelTest.handleSuite(roomExtension);
 			statusLabel.setText("Status..");
 			return;
-			
 		}
-		statusLabel.setText("Deleting missed Calls for "+roomExtension);
-		sleep(2);
-		modelTest.testingCallSequence();
-		sleep(2);
-		statusLabel.setText("Finished");
+//		statusLabel.setText("Deleting missed Calls for "+roomExtension);
+//		sleep(2);
+//		modelTest.testingCallSequence();
+//		sleep(2);
+//		statusLabel.setText("Finished");
 		
-//		modelTest.resetMissedCalls(roomExtension);
+		modelTest.resetMissedCalls(roomExtension);
 //		
 //		modelTest.restDialedCalls(roomExtension);
 //		
