@@ -40,7 +40,7 @@ public class Model {
 
 	private HashMap<Integer, InetAddress> rooms;
 	private List<InetAddress> suitesList100;
-	private  List<InetAddress> suitesList200;
+	private List<InetAddress> suitesList200;
 	private List<InetAddress> suitesList300;
 
 	private URL url;
@@ -56,7 +56,7 @@ public class Model {
 
 	}
 
-	public void resetMissedCalls(int roomExtension) {
+	public void resetMissedCalls(int roomExtension, String mode) {
 		// execute post to rest the missed calls
 		// Integer roomNumber = rooms.get(key)
 		String IPaddress = "";
@@ -83,15 +83,15 @@ public class Model {
 				System.out.println(line);
 			}
 
-		} 
+		}
 		catch (MalformedURLException e) {
 			System.out.println("MalformedURLException--");
 			System.out.println(e.getMessage());
-		} 
+		}
 		catch (ProtocolException e) {
 			System.out.println("ProtocolException--");
 			System.out.println(e.getMessage());
-		} 
+		}
 		catch (IOException e) {
 			System.out.println("IOException--");
 			System.out.println(e.getMessage());
@@ -99,8 +99,8 @@ public class Model {
 
 	}
 
-	public void restDialedCalls(int roomExtension) {
-		
+	public void restDialedCalls(int roomExtension, String mode) {
+
 		this.encodinge = "Basic " + new String(Base64.getEncoder().encode(CREDENTIALS.getBytes()));
 		// user roomExtension instead of static ip string
 		String serviceURL = PROTOCOL + "10.90.1.134" + VOLUME_UP;
@@ -116,7 +116,7 @@ public class Model {
 			this.conn.setDoInput(true);
 			this.conn.setDoOutput(true);
 			this.conn.connect();
-			
+
 			this.contento = (InputStream) conn.getInputStream();
 			this.inBuff = new BufferedReader(new InputStreamReader(contento));
 			String line;
@@ -124,22 +124,22 @@ public class Model {
 				System.out.println(line);
 			}
 
-		} 
+		}
 		catch (MalformedURLException e) {
 			System.out.println("MalformedURLException--");
 			System.out.println(e.getMessage());
-		} 
+		}
 		catch (ProtocolException e) {
 			System.out.println("ProtocolException--");
 			System.out.println(e.getMessage());
-		} 
+		}
 		catch (IOException e) {
 			System.out.println("IOException--");
 			System.out.println(e.getMessage());
 		}
 	}
 
-	public void resetRecievedCalls(int roomExtension) {
+	public void resetRecievedCalls(int roomExtension, String mode) {
 		this.encodinge = "Basic " + new String(Base64.getEncoder().encode(CREDENTIALS.getBytes()));
 		// user roomExtension instead of static ip string
 		String serviceURL = PROTOCOL + "10.90.1.134" + VOLUME_DOWN;
@@ -155,7 +155,7 @@ public class Model {
 			this.conn.setDoInput(true);
 			this.conn.setDoOutput(true);
 			this.conn.connect();
-			
+
 			this.contento = (InputStream) conn.getInputStream();
 			this.inBuff = new BufferedReader(new InputStreamReader(contento));
 			String line;
@@ -163,15 +163,15 @@ public class Model {
 				System.out.println(line);
 			}
 
-		} 
+		}
 		catch (MalformedURLException e) {
 			System.out.println("MalformedURLException--");
 			System.out.println(e.getMessage());
-		} 
+		}
 		catch (ProtocolException e) {
 			System.out.println("ProtocolException--");
 			System.out.println(e.getMessage());
-		} 
+		}
 		catch (IOException e) {
 			System.out.println("IOException--");
 			System.out.println(e.getMessage());
@@ -179,7 +179,56 @@ public class Model {
 
 	}
 
-	public void rebootNode(int roomExtension) {
+	public void rebootNode(int roomExtension, String mode) {
+
+		this.encodinge = "Basic " + new String(Base64.getEncoder().encode(CREDENTIALS.getBytes()));
+		// user roomExtension instead of static ip string
+		String serviceURL = PROTOCOL + "10.90.1.134" + VOLUME_DOWN;
+		try {
+			this.url = new URL(serviceURL);
+			this.conn = (HttpURLConnection) this.url.openConnection();
+			this.conn.setRequestProperty("Authorization", this.encodinge);
+			this.conn.setRequestMethod("POST");
+			this.conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			this.conn.setRequestProperty("Content-Length", "" + serviceURL.getBytes().length);
+			this.conn.setRequestProperty("Content-Language", "en-US");
+			this.conn.setUseCaches(false);
+			this.conn.setDoInput(true);
+			this.conn.setDoOutput(true);
+			this.conn.connect();
+
+			this.contento = (InputStream) conn.getInputStream();
+			this.inBuff = new BufferedReader(new InputStreamReader(contento));
+			String line;
+			while ((line = inBuff.readLine()) != null) {
+				System.out.println(line);
+			}
+
+		}
+		catch (MalformedURLException e) {
+			System.out.println("MalformedURLException--");
+			System.out.println(e.getMessage());
+		}
+		catch (ProtocolException e) {
+			System.out.println("ProtocolException--");
+			System.out.println(e.getMessage());
+		}
+		catch (IOException e) {
+			System.out.println("IOException--");
+			System.out.println(e.getMessage());
+		}
+
+	}
+
+	private void removeSuite306() {
+
+	}
+
+	private void removeSuite206() {
+
+	}
+
+	private void removeSuite106() {
 		// TODO Auto-generated method stub
 
 	}
@@ -240,7 +289,8 @@ public class Model {
 			this.rooms.put(507, InetAddress.getByName("172.28.3.52"));
 			this.rooms.put(508, InetAddress.getByName("172.28.3.57"));
 
-		} catch (UnknownHostException e) {
+		}
+		catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -250,25 +300,14 @@ public class Model {
 	public void handleSuite(int roomExtension) {
 		if (roomExtension == 106) {
 			removeSuite106();
-		} else if (roomExtension == 206) {
+		}
+		else if (roomExtension == 206) {
 			removeSuite206();
-		} else if (roomExtension == 306) {
+		}
+		else if (roomExtension == 306) {
 			removeSuite306();
 		}
 
 	}
 
-	private void removeSuite306() {
-
-	}
-
-	private void removeSuite206() {
-		// TODO Auto-generated method stub
-
-	}
-
-	private void removeSuite106() {
-		// TODO Auto-generated method stub
-
-	}
 }
