@@ -40,7 +40,7 @@ public class Model {
 
 	private HashMap<Integer, InetAddress> rooms;
 	private List<InetAddress> suitesList100;
-	private List<InetAddress> suitesList200;
+	private  List<InetAddress> suitesList200;
 	private List<InetAddress> suitesList300;
 
 	private URL url;
@@ -54,40 +54,6 @@ public class Model {
 		// initialize data structure here
 		initializeVars();
 
-	}
-
-	public void executePost() throws IOException {
-		// reset missed calls
-		// URL url = new URL("http://10.90.1.134/index.htm?misseddel=0");
-
-		// reset missed calls
-		// http://10.90.1.134/index.htm?misseddel=0
-		// URL url = new URL("http://10.90.1.134/index.htm?misseddel=0");
-		// reset dialed calls
-		// http://10.90.1.134/index.htm?dialeddel=0
-		// URL url = new URL("http://10.90.1.134/index.htm?dialeddel=0");
-		// reset recieved calls
-		// http://10.90.1.134/index.htm?receiveddel=0
-		// URL url = new URL("http://10.90.1.134/index.htm?receiveddel=0");
-		// reboot
-		// http://10.90.1.134/advanced_update.htm?reboot=Reboot
-		URL url = new URL("http://10.90.1.134/advanced_update.htm?reboot=Reboot");
-
-		String encoding = Base64.getEncoder().encodeToString(new String("admin:mKHyJQkDWu2hQ9Ng").getBytes());
-
-		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-		connection.setRequestMethod("POST");
-		connection.setDoOutput(true);
-		connection.setRequestProperty("Authorization", "Basic " + encoding);
-		// might not need this connect.
-		// or I might not need to create an InputStream because I'm just sending
-		connection.connect();
-		InputStream content = (InputStream) connection.getInputStream();
-		BufferedReader in = new BufferedReader(new InputStreamReader(content));
-		String line;
-		while ((line = in.readLine()) != null) {
-			System.out.println(line);
-		}
 	}
 
 	public void resetMissedCalls(int roomExtension) {
@@ -117,61 +83,20 @@ public class Model {
 				System.out.println(line);
 			}
 
-		} catch (MalformedURLException e) {
+		} 
+		catch (MalformedURLException e) {
 			System.out.println("MalformedURLException--");
 			System.out.println(e.getMessage());
-		} catch (ProtocolException e) {
+		} 
+		catch (ProtocolException e) {
 			System.out.println("ProtocolException--");
 			System.out.println(e.getMessage());
-		} catch (IOException e) {
+		} 
+		catch (IOException e) {
 			System.out.println("IOException--");
 			System.out.println(e.getMessage());
 		}
 
-	}
-
-	public void testingCallSequence() {
-
-		// String encoding = Base64.getEncoder().encodeToString(new
-		// String(CREDENTIALS).getBytes());
-
-		String serviceURL = PROTOCOL + "10.90.1.134" + VOLUME_UP;
-		try {
-
-			// DEBUG MODE
-			URL myURL = new URL(serviceURL);
-			HttpURLConnection myURLConnection = (HttpURLConnection) myURL.openConnection();
-			String userCredentials = CREDENTIALS;
-			String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userCredentials.getBytes()));
-			myURLConnection.setRequestProperty("Authorization", basicAuth);
-
-			myURLConnection.setRequestMethod("POST");
-			myURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-			myURLConnection.setRequestProperty("Content-Length", "" + serviceURL.getBytes().length);
-			myURLConnection.setRequestProperty("Content-Language", "en-US");
-			myURLConnection.setUseCaches(false);
-			myURLConnection.setDoInput(true);
-			myURLConnection.setDoOutput(true);
-			myURLConnection.connect();
-			System.out.println("Everything good here");
-
-			InputStream content = (InputStream) myURLConnection.getInputStream();
-			BufferedReader in = new BufferedReader(new InputStreamReader(content));
-			String line;
-			while ((line = in.readLine()) != null) {
-				System.out.println(line);
-			}
-
-		} catch (MalformedURLException e) {
-			System.out.println("MalformedURLException--");
-			System.out.println(e.getMessage());
-		} catch (ProtocolException e) {
-			System.out.println("ProtocolException--");
-			System.out.println(e.getMessage());
-		} catch (IOException e) {
-			System.out.println("IOException--");
-			System.out.println(e.getMessage());
-		}
 	}
 
 	public void restDialedCalls(int roomExtension) {
@@ -215,7 +140,42 @@ public class Model {
 	}
 
 	public void resetRecievedCalls(int roomExtension) {
-		// TODO Auto-generated method stub
+		this.encodinge = "Basic " + new String(Base64.getEncoder().encode(CREDENTIALS.getBytes()));
+		// user roomExtension instead of static ip string
+		String serviceURL = PROTOCOL + "10.90.1.134" + VOLUME_DOWN;
+		try {
+			this.url = new URL(serviceURL);
+			this.conn = (HttpURLConnection) this.url.openConnection();
+			this.conn.setRequestProperty("Authorization", this.encodinge);
+			this.conn.setRequestMethod("POST");
+			this.conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			this.conn.setRequestProperty("Content-Length", "" + serviceURL.getBytes().length);
+			this.conn.setRequestProperty("Content-Language", "en-US");
+			this.conn.setUseCaches(false);
+			this.conn.setDoInput(true);
+			this.conn.setDoOutput(true);
+			this.conn.connect();
+			
+			this.contento = (InputStream) conn.getInputStream();
+			this.inBuff = new BufferedReader(new InputStreamReader(contento));
+			String line;
+			while ((line = inBuff.readLine()) != null) {
+				System.out.println(line);
+			}
+
+		} 
+		catch (MalformedURLException e) {
+			System.out.println("MalformedURLException--");
+			System.out.println(e.getMessage());
+		} 
+		catch (ProtocolException e) {
+			System.out.println("ProtocolException--");
+			System.out.println(e.getMessage());
+		} 
+		catch (IOException e) {
+			System.out.println("IOException--");
+			System.out.println(e.getMessage());
+		}
 
 	}
 
@@ -223,21 +183,6 @@ public class Model {
 		// TODO Auto-generated method stub
 
 	}
-
-	// private void setIPAddress() {
-	// InetAddress ip = null;
-	// try {
-	// // read the ip addresses from a file maybe??
-	// ip = InetAddress.getByName("192.168.2.1");
-	// } catch (UnknownHostException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// byte[] bytes = ip.getAddress();
-	// for (byte b : bytes) {
-	// System.out.println(b & 0xFF);
-	// }
-	// }
 
 	private void initializeVars() {
 		this.rooms = new HashMap<Integer, InetAddress>();
