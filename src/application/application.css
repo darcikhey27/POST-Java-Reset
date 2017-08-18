@@ -6,6 +6,7 @@ AnchorPane {
 Label {
 	-fx-text-fill: #660000;
 	-fx-font-size: 1.8em;
+	-fx-font-family: "Open Sans";
 }
 #statusLabel {
 	-fx-text-fill: #660000;
