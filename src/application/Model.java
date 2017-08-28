@@ -51,11 +51,7 @@ public class Model {
 	private String encodinge;
 
 	public Model() {
-		
-		
-		
 		initializeVars();
-
 	}
 
 	public void resetDevice(int roomExtension, String mode) {
@@ -65,13 +61,12 @@ public class Model {
 
 		IPaddress = rooms.get(roomExtension).getHostAddress();
 		String serviceUrl = getUrl(mode, IPaddress);
-
 		System.out.println(IPaddress);
 
 		try {
 
 			// DEBUG MODE == using static IP instead of IPaddress
-			URL urlTest = new URL(PROTOCOL + "10.90.1.134" + VOLUME_DOWN);
+			URL urlTest = new URL(PROTOCOL + "10.90.1.134" + VOLUME_UP);
 			// this.url = new URL(PROTOCOL + IPaddress + RESET_MISSED);
 			String encoding = Base64.getEncoder().encodeToString(new String(CREDENTIALS).getBytes());
 			HttpURLConnection connection = (HttpURLConnection) urlTest.openConnection();
